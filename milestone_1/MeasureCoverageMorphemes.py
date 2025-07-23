@@ -57,7 +57,7 @@ def main():
     plt.plot(x_values, coverage_list)
     plt.xlabel("Number of types")
  
-    plt.ylabel("Coverage [%]")
+    plt.ylabel("Coverage")
     plt.title("Coverage of Morphemes (aka accuracy)")
 
     plt.grid()

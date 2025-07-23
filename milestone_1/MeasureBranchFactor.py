@@ -34,41 +34,37 @@ def main():
     # Measure
     #
 
-    num_words = len(word_set)
-
-    coverage_list = []
+    branch_factor_list = []
 
     for num_types in range(0, 260, 10):
 
         print(num_types)
         bpe = BytePairEncoding(num_types)
 
-        vocab = bpe.train(corpus)
+        bpe.train(corpus)
 
-        cnt_matches = 0
-        for type in vocab:
-            if type in word_set:
-                cnt_matches += 1
+        branch_factor_list_tmp = []
+        for word in word_set:
+            tokens = bpe.tokenize_word(word)
+            num_tokens = len(tokens)
+            branch_factor_list_tmp.append(num_tokens)
         
-        if num_types == 0:
-            coverage = 0
-        else:
-            coverage = cnt_matches / num_words
+        branch_factor = np.average(branch_factor_list_tmp)
 
-        coverage_list.append(coverage)
+        branch_factor_list.append(branch_factor)
 
     x_values = list(range(0, 260, 10))
 
-    plt.plot(x_values, coverage_list)
+    plt.plot(x_values, branch_factor_list)
     plt.xlabel("Number of types")
  
-    plt.ylabel("Coverage [%]")
-    plt.title("Coverage of full words")
+    plt.ylabel("Average branch factor")
+    plt.title("Average branch factor of vocabulary")
 
     plt.grid()
     plt.tight_layout()
 
-    plt.savefig("./plots/coverage_fullwords.png", dpi=200)
+    plt.savefig("./plots/branch_factor.png", dpi=200)
     plt.show()
 
 if __name__ == "__main__":
