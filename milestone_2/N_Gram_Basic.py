@@ -1,7 +1,7 @@
 import numpy as np
 import tqdm
 
-class N_Gram:
+class N_Gram_Basic:
 
     def __init__(self, n, vocab):
         # n = 1 -> unigram P(wt​​)
@@ -79,9 +79,38 @@ class N_Gram:
         prob = cnt_target / cnts 
 
         return prob
+    
+
+    # No Laplace-smoothing
+    def get_prob_raiseKeyError(self, token_ids):
+
+        token_ids_tmp = token_ids.copy()
+
+        try:
+            cnt_target = self.cnts[tuple(token_ids_tmp)]
+        except KeyError:
+            raise KeyError
+        
+
+        cnt_list = []
+        for token_id in range(self.vocab_size):
+            
+            token_ids_tmp[-1] = token_id
+
+            try:
+                cnt = self.cnts[tuple(token_ids_tmp)]
+            except KeyError:
+                cnt = 0
+
+            cnt_list.append(cnt)
+            
+        cnts = np.sum(cnt_list)
+
+        prob = cnt_target / cnts 
+
+        return prob
 
 
-    # add_one: false -> MLE
     def get_distri(self, token_ids_window):
 
         token_ids_window.append(None) # dummy

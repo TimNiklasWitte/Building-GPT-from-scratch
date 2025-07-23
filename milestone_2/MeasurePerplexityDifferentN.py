@@ -4,7 +4,7 @@ sys.path.append("./../milestone_1")
 import matplotlib.pyplot as plt
 
 from BytePairEncoding import *
-from N_Gram import *
+from N_Gram_Basic import *
 
 def main():
     
@@ -38,7 +38,7 @@ def main():
 
     perplexity_list = []
     for n in range(1, 7):
-        n_gram = N_Gram(n=n, vocab=bpe.vocab)
+        n_gram = N_Gram_Basic(n=n, vocab=bpe.vocab)
 
         corpus_train_tokenized = bpe.segment(corpus_train)
 

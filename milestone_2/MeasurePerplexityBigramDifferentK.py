@@ -4,7 +4,7 @@ sys.path.append("./../milestone_1")
 import matplotlib.pyplot as plt
 
 from BytePairEncoding import *
-from N_Gram import *
+from N_Gram_Basic import *
 
 def main():
     
@@ -39,7 +39,7 @@ def main():
         # Train Bigram
         #
 
-        bigram = N_Gram(n=2, vocab=bpe.vocab)
+        bigram = N_Gram_Basic(n=2, vocab=bpe.vocab)
 
         corpus_train_tokenized = bpe.segment(corpus_train)
 
