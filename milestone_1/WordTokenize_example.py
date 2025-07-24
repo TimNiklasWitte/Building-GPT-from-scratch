@@ -9,7 +9,7 @@ def main():
     bpe.vocab.insert(0, "ly")
 
     print(bpe.vocab)
-    tokenization = bpe.tokenize_word("unfortunately ")
+    tokenization = bpe.tokenize_word("unfortunately")
     print(tokenization)
 
 

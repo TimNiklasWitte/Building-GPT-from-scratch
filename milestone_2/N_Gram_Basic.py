@@ -12,7 +12,8 @@ class N_Gram_Basic:
 
 
         self.n = n 
-
+        self.vocab = vocab 
+        
         self.vocab_size = len(vocab)
 
         # e.g. P(wt​∣wt−2​,wt−1​) -> order: wt−2​,wt−1, wt
@@ -21,6 +22,7 @@ class N_Gram_Basic:
         self.map_token_to_id = {
             token:id for id, token in enumerate(vocab)
         }
+
 
 
     def train(self, corpus_tokenized):
@@ -74,6 +76,9 @@ class N_Gram_Basic:
             
         cnts = np.sum(cnt_list)
 
+        if cnts == 0:
+            return 1 / self.vocab_size
+
         prob = cnt_target / cnts 
 
         return prob
@@ -85,6 +90,15 @@ class N_Gram_Basic:
         try:
             cnt_target = self.cnts[tuple(token_ids_window)]
         except KeyError:
+            # unigram word not present -> return avg prob
+            if self.n == 1:
+                p = 0
+
+                for token_id in range(self.vocab_size):
+                    p += self.get_prob([token_id])
+                
+                return p / self.vocab_size 
+            
             raise KeyError
         
         # Prevent side effect
@@ -104,6 +118,9 @@ class N_Gram_Basic:
             
         cnts = np.sum(cnt_list)
 
+        if cnts == 0:
+            return 1 / self.vocab_size
+
         prob = cnt_target / cnts 
 
         return prob
@@ -111,12 +128,13 @@ class N_Gram_Basic:
 
     def get_distri(self, token_ids_window):
 
+
         # Prevent side effect
         token_ids_window_tmp = token_ids_window.copy()
 
         token_ids_window_tmp.append(None) # dummy
 
-        cnt_list = []
+        cnt_tokens_list = []
         for token_id in range(self.vocab_size):
 
             token_ids_window_tmp[-1] = token_id
@@ -126,12 +144,12 @@ class N_Gram_Basic:
             except KeyError:
                 cnt = 1
 
-            cnt_list.append(cnt)
+            cnt_tokens_list.append(cnt)
+        
+        
+        cnt_tokens = np.array(cnt_tokens_list)
 
-        cnts = np.array(cnt_list)
-        cnts_sum = np.sum(cnts)
-
-        distri = cnts / cnts_sum
+        distri = cnt_tokens / np.sum(cnt_tokens)
 
         return distri
 

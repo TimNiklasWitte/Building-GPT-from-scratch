@@ -139,17 +139,15 @@ class BytePairEncoding:
             line = line.split(" ")
             
             for word in line:
-                word = self.normalize_word(word)
 
+                word = self.normalize_word(word)
+             
                 word = word + ' '
 
                 token = self.tokenize_word(word)
 
                 tokenized_text += token
         
-        # Remove dummy space at the end
-        tokenized_text = tokenized_text[:-1]
-
         return tokenized_text
     
     def tokenize_word(self, word):

@@ -14,6 +14,7 @@ class N_Gram_Advanced:
 
         self.n = n 
         self.vocab = vocab
+        self.vocab_size = len(vocab)
 
         self.n_gram_list = [
             N_Gram_Basic(i, vocab) for i in range(1, n + 1) # last element of range is exclusive ;)
@@ -53,7 +54,7 @@ class N_Gram_Advanced:
             except KeyError:
                 token_ids_window_tmp.pop(0)
 
-    
+
     def get_prob_interpolation(self, token_ids):
 
         token_ids_tmp = token_ids.copy()
@@ -71,9 +72,9 @@ class N_Gram_Advanced:
 
 
     # Generation based on 
-    def get_distri(self, token_ids_window, get_prob):
+    def get_distri(self, get_prob, token_ids_window):
         
-        distri = np.zeros(shape=(self.vocab_size),)
+        distri = np.zeros(shape=(self.vocab_size,))
 
         # Prevent side effect
         token_ids_window_tmp = token_ids_window.copy()
