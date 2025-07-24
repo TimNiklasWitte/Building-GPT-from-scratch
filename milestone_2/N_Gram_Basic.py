@@ -8,67 +8,65 @@ class N_Gram_Basic:
         # n = 2 -> bigram  P(wt​∣​wt−1​)
         # n = 3 -> trigram P(wt​∣wt−2​,wt−1​)
 
+        assert(1 <= n)
+
+
         self.n = n 
 
         self.vocab_size = len(vocab)
 
-        cnts_shape = [self.vocab_size] * n 
-        cnts_shape = tuple(cnts_shape)
-
+        # e.g. P(wt​∣wt−2​,wt−1​) -> order: wt−2​,wt−1, wt
         self.cnts = {}
  
-        self.map_token_id = {
+        self.map_token_to_id = {
             token:id for id, token in enumerate(vocab)
         }
 
 
     def train(self, corpus_tokenized):
         
-        token_ids = []
+        tokens = corpus_tokenized[0:self.n]
+        token_ids_window = [self.map_token_to_id[id] for id in tokens]
         
         print(f"Train {self.n}-Gram:")
 
-        for token in tqdm.tqdm(corpus_tokenized, position=0, leave=True):
+        for token in tqdm.tqdm(corpus_tokenized[self.n:], position=0, leave=True):
        
-            token_id = self.map_token_id[token]
+            try:
+                self.cnts[tuple(token_ids_window)] += 1
 
-            token_ids.append(token_id)
-
-            # Need sufficient amount of token
-            # e.g. n = 3 -> need last 2 tokens!
-
-            if len(token_ids) < self.n:
-                continue
+            except KeyError:
+                self.cnts[tuple(token_ids_window)] = 1
             
-            else:
-                
-                try:
-                    self.cnts[tuple(token_ids)] += 1
+            token_id = self.map_token_to_id[token]
+            token_ids_window.append(token_id)
 
-                except KeyError:
-                    self.cnts[tuple(token_ids)] = 1
-
-                token_ids.pop(0)
+            token_ids_window.pop(0)
 
        
 
 
-    def get_prob(self, token_ids):
+    def get_prob(self, token_ids_window):
 
-        token_ids_tmp = token_ids.copy()
+        #
+        # Laplace smoothing
+        #
 
         try:
-            cnt_target = self.cnts[tuple(token_ids_tmp)] + 1
+            cnt_target = self.cnts[tuple(token_ids_window)] + 1
         except KeyError:
             cnt_target = 1
+
+        # Prevent side effect
+        token_ids_window_tmp = token_ids_window.copy()
 
         cnt_list = []
         for token_id in range(self.vocab_size):
             
-            token_ids_tmp[-1] = token_id
+            token_ids_window_tmp[-1] = token_id
 
             try:
-                cnt = self.cnts[tuple(token_ids_tmp)] + 1
+                cnt = self.cnts[tuple(token_ids_window_tmp)] + 1
             except KeyError:
                 cnt = 1
 
@@ -81,24 +79,24 @@ class N_Gram_Basic:
         return prob
     
 
-    # No Laplace-smoothing
-    def get_prob_raiseKeyError(self, token_ids):
-
-        token_ids_tmp = token_ids.copy()
+    # No Laplace-smoothing -> trigger KeyError (later used for backoff)
+    def get_prob_raiseKeyError(self, token_ids_window):
 
         try:
-            cnt_target = self.cnts[tuple(token_ids_tmp)]
+            cnt_target = self.cnts[tuple(token_ids_window)]
         except KeyError:
             raise KeyError
         
+        # Prevent side effect
+        token_ids_window_tmp = token_ids_window.copy()
 
         cnt_list = []
         for token_id in range(self.vocab_size):
             
-            token_ids_tmp[-1] = token_id
+            token_ids_window_tmp[-1] = token_id
 
             try:
-                cnt = self.cnts[tuple(token_ids_tmp)]
+                cnt = self.cnts[tuple(token_ids_window_tmp)]
             except KeyError:
                 cnt = 0
 
@@ -113,17 +111,18 @@ class N_Gram_Basic:
 
     def get_distri(self, token_ids_window):
 
-        token_ids_window.append(None) # dummy
+        # Prevent side effect
+        token_ids_window_tmp = token_ids_window.copy()
 
-        token_ids = token_ids_window
-    
+        token_ids_window_tmp.append(None) # dummy
+
         cnt_list = []
         for token_id in range(self.vocab_size):
 
-            token_ids[-1] = token_id
+            token_ids_window_tmp[-1] = token_id
 
             try:
-                cnt = self.cnts[tuple(token_ids)] + 1
+                cnt = self.cnts[tuple(token_ids_window_tmp)] + 1
             except KeyError:
                 cnt = 1
 
@@ -138,30 +137,26 @@ class N_Gram_Basic:
 
 
     def perplexity(self, corpus_val_tokenized):
+        
+        print("Compute perplexity")
 
-        token_ids = [] 
+        tokens = corpus_val_tokenized[0:self.n]
+        token_ids_window = [self.map_token_to_id[id] for id in tokens]
 
         logit_list = []
-        for token in corpus_val_tokenized:
+        for token in tqdm.tqdm(corpus_val_tokenized[self.n:], position=0, leave=True):
 
-            token_id = self.map_token_id[token]
-
-            token_ids.append(token_id)
-
-            # Need sufficient amount of token
-            # e.g. n = 3 -> need last 2 tokens!
-            if len(token_ids) < self.n:
-                continue
-                
-            else:
-                
-                prob = self.get_prob(token_ids)
+            prob = self.get_prob(token_ids_window)
       
-                logit = np.log(prob)
+            logit = np.log(prob)
             
-                logit_list.append(logit)
+            logit_list.append(logit)
 
-                token_ids.pop(0)
+            
+            token_id = self.map_token_to_id[token]
+            token_ids_window.append(token_id)
+
+            token_ids_window.pop(0)
 
         tmp = - np.average(logit_list)
        
