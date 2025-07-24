@@ -20,7 +20,7 @@ def generate(context, bpe, model, get_distri, sample=False):
 
     window_size = model.n - 1
 
-    stop_token_id = model.map_token_to_id["."]
+    stop_token_id = model.map_token_to_id[". "]
     new_line_token_id = model.map_token_to_id['\n']
 
     cnt_tokens = 0
