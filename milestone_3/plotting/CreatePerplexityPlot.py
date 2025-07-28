@@ -8,14 +8,14 @@ import numpy as np
 def main():
 
     ppl_list = []
-    for seq_len in range(1, 6):
+    for seq_len in range(1, 13):
         df = load_dataframe(f"./../logs/{seq_len}/")
 
         ppl = np.min(df.loc[:, "train perplexity"])
         
         ppl_list.append(ppl)
 
-    n_values = list(range(1, 6))
+    n_values = list(range(2, 14))
 
     plt.plot(n_values, ppl_list)
 
