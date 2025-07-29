@@ -4,12 +4,18 @@ sys.path.append("./../../milestone_1")
 import os 
 
 from BytePairEncoding import *
-from Dataset import *
-from Neural_Bigram import *
+from NextTokenPredictionDataset import *
+from Neural_N_Gram import *
 
 BATCH_SIZE = 32
+NUM_THREADS = 16
 
 def main():
+
+    #
+    # Device
+    #
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     #
     # Load data
@@ -46,38 +52,45 @@ def main():
         # Init Bigram
         #
 
-        bigram = Neural_Bigram(vocab_size=len(bpe.vocab))
+        # learning rate does not matter for evaluation!
+        bigram = Neural_N_Gram(n=2, vocab_size=len(bpe.vocab), learning_rate=0.001) 
+        if torch.cuda.is_available():
+            bigram.cuda()
 
         #
-        # Datasets
+        # Dataset
         #
 
         corpus_test_tokenized = bpe.segment(corpus_test)
 
-        test_ds = Dataset(batch_size=BATCH_SIZE, corpus_tokenized=corpus_test_tokenized, vocab=bpe.vocab)
+        test_dataset = NextTokenPredictionDataset(corpus_test_tokenized, seq_len=1, vocab=bpe.vocab)
         
-      
+        #
+        # Data loader
+        #
+    
+        test_loader = torch.utils.data.DataLoader(test_dataset, 
+                                                  batch_size=BATCH_SIZE, 
+                                                  shuffle=False, 
+                                                  num_workers=NUM_THREADS)
+        
         for learning_rate in learning_rate_list:
             
             root = f"./saved_models/{learning_rate}_{k}/"
-            files = os.listdir(root)
-            for file in files:
-                path = root + file 
+            file = os.listdir(root)[-1]
+        
+            path = root + file 
 
-                epoch = int(file.split("_")[1])
+            bigram.load_state_dict(torch.load(path, weights_only=True))
 
-                if epoch == 250:
-
-                    bigram.load(path)
-
-                    test_loss, test_ppl = bigram.test(test_ds)
+            test_loss, test_ppl = bigram.test(test_loader, device)
                     
-                    print(f"Learning rate: {learning_rate}, k: {k} -> test perplexity: {test_ppl}")
+            print(f"Learning rate: {learning_rate}, k: {k} -> test perplexity: {test_ppl}")
 
-                    if test_ppl < best_test_ppl:
-                        best_test_ppl = test_ppl
+            if test_ppl < best_test_ppl:
+                best_test_ppl = test_ppl
                         
-                        best_test_ppl_config = (learning_rate, k)
+                best_test_ppl_config = (learning_rate, k)
 
                     
 

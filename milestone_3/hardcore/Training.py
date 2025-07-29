@@ -235,6 +235,7 @@ def main():
     axs[1].legend()
     axs[1].set_title("Perplexity")
     
+    plt.suptitle(f"Learning rate: {learning_rate}, k: {k}")
     plt.tight_layout()
 
     plt.savefig(f"./plots/{learning_rate}_{k}.png", dpi=200)
