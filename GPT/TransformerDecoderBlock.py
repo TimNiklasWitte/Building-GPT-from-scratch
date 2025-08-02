@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from MultiHeadAttention import *
+from CausalMultiHeadAttention import *
 
 class TransformerDecoderBlock(torch.nn.Module):
 
@@ -10,7 +10,7 @@ class TransformerDecoderBlock(torch.nn.Module):
 
         self.attn = nn.Sequential(
             nn.LayerNorm(dim),
-            MultiHeadAttention(n_heads=n_heads, block_size=block_size, dim=dim, dropout=dropout),
+            CausalMultiHeadAttention(n_heads=n_heads, block_size=block_size, dim=dim, dropout=dropout),
             nn.Dropout(dropout)
         )
 
