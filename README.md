@@ -108,7 +108,15 @@ Best model: ppl is about 14
 
 # GPT
 
-wait for me
+According to ./milestone_2/plots/PerplexityBigramDifferentK.png, ./milestone_2/plots/Perplexity6_GramDifferentK.png
+ppl is increasing with vocab size 
+-> artifact of sparsity
+-> tryout k values of equal space intervals -> 100, 150, 250 and 2000 (just to see what happens with large k)
+
+Different embedding sizes: 16, 32, 64
+
+
+wait for the results :)
 
 
 # Appendix

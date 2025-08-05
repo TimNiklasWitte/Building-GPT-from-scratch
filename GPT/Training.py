@@ -17,7 +17,7 @@ sys.path.append("./../milestone_1")
 from BytePairEncoding import *
 
 
-NUM_EPOCHS = 64
+NUM_EPOCHS = 100
 BATCH_SIZE = 128
 NUM_THREADS = 16
 BLOCK_SIZE = 64
