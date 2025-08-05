@@ -10,7 +10,7 @@ from TransformerDecoderBlock import *
 
 class GPT(torch.nn.Module):
 
-    def __init__(self, block_size, vocab_size, learning_rate):
+    def __init__(self, block_size, vocab_size, emb_dim):
         super(GPT, self).__init__()
 
         self.vocab_size = vocab_size
@@ -19,7 +19,7 @@ class GPT(torch.nn.Module):
         # Token embedding
         #
 
-        self.emb_dim = 64
+        self.emb_dim = emb_dim
         self.token_embedding = nn.Embedding(num_embeddings=vocab_size, embedding_dim=self.emb_dim)
 
         #
@@ -27,16 +27,23 @@ class GPT(torch.nn.Module):
         #
 
         self.pos_embedding = nn.Parameter(
-            torch.empty(size=(1, block_size, self.emb_dim))
+            torch.randn(size=(1, block_size, self.emb_dim))
         )
 
+        #
+        # Dropout
+        #
+
+        self.dropout = nn.Dropout(p=0.1)
 
         #
         # Layers
         #
 
         self.decoder_blocks = nn.Sequential(
-            TransformerDecoderBlock(n_heads=2, block_size=block_size, dim=self.emb_dim, dropout=0.1)
+            TransformerDecoderBlock(n_heads=4, block_size=block_size, dim=self.emb_dim, dropout=0.1),
+            TransformerDecoderBlock(n_heads=4, block_size=block_size, dim=self.emb_dim, dropout=0.1),
+            TransformerDecoderBlock(n_heads=4, block_size=block_size, dim=self.emb_dim, dropout=0.1)
         )
 
         self.layer_norm = nn.LayerNorm(self.emb_dim)
@@ -47,7 +54,7 @@ class GPT(torch.nn.Module):
         #
 
         self.cce_loss = torch.nn.CrossEntropyLoss()
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=0.0001)
 
         #
         # Metrics
@@ -58,8 +65,12 @@ class GPT(torch.nn.Module):
 
 
     def forward(self, x):
- 
+        
+        batch_size, seq_len = x.shape
+        
         x = self.token_embedding(x) + self.pos_embedding
+
+        x = self.dropout(x)
 
         x = self.decoder_blocks(x)
 
@@ -91,7 +102,6 @@ class GPT(torch.nn.Module):
             
             # Loss
             loss = self.cce_loss(preds, targets)
-
             self.loss_metric.update(loss)
 
             # Perplexity

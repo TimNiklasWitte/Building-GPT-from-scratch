@@ -17,10 +17,10 @@ sys.path.append("./../milestone_1")
 from BytePairEncoding import *
 
 
-NUM_EPOCHS = 32
-BATCH_SIZE = 32
+NUM_EPOCHS = 64
+BATCH_SIZE = 128
 NUM_THREADS = 16
-BLOCK_SIZE = 8
+BLOCK_SIZE = 64
 
 def main():
 
@@ -33,19 +33,16 @@ def main():
     # Hyperparameters controlled via command line
     #
     
-    #learning_rate = float(sys.argv[1])
-    #k = int(sys.argv[2])
+    emb_dim = int(sys.argv[1])
+    k = int(sys.argv[2])
     
-    learning_rate = 0.0001
-    k = 10
-
-    print(learning_rate, k)
+    print(emb_dim, k)
     
     #
     # Logging
     #
 
-    file_path = f"./logs/{learning_rate}_{k}"
+    file_path = f"./logs/{emb_dim}_{k}"
     writer = SummaryWriter(file_path)
     
     #
@@ -97,7 +94,7 @@ def main():
     # Init GPT
     #
 
-    model = GPT(block_size=BLOCK_SIZE, vocab_size=len(bpe.vocab), learning_rate=learning_rate)
+    model = GPT(block_size=BLOCK_SIZE, vocab_size=len(bpe.vocab), emb_dim=emb_dim)
     if torch.cuda.is_available():
         model.cuda()
     
@@ -110,7 +107,7 @@ def main():
 
     top_3_ppl_list = []
 
-    saved_models_dir = f"./saved_models/{learning_rate}_{k}"
+    saved_models_dir = f"./saved_models/{emb_dim}_{k}"
     os.makedirs(saved_models_dir, exist_ok=True)
     
 

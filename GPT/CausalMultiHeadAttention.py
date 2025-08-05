@@ -15,12 +15,12 @@ class CausalMultiHeadAttention(torch.nn.Module):
 
         self.dropout = nn.Dropout(p=dropout)
 
-        
+        self.linear = nn.Linear(dim, dim)
 
         self.n_heads = n_heads
         self.head_dim = dim // n_heads
 
-        self.sqrt_dim = math.sqrt(dim)
+        self.sqrt_head_dim = math.sqrt(self.head_dim)
 
         #
         # Mask generation
@@ -74,7 +74,7 @@ class CausalMultiHeadAttention(torch.nn.Module):
         # aff: (batch_size, n_heads, seq_len, seq_len)
 
         # Scaling
-        aff = aff / self.sqrt_dim
+        aff = aff / self.sqrt_head_dim
 
         # aff: (batch_size, n_heads, seq_len, seq_len)
 
@@ -90,7 +90,7 @@ class CausalMultiHeadAttention(torch.nn.Module):
         # Softmax 
         #
 
-        attn = F.softmax(aff,dim=2)
+        attn = F.softmax(aff,dim=3)
 
         # attn: (batch_size, n_heads, seq_len, seq_len)
 
@@ -119,5 +119,6 @@ class CausalMultiHeadAttention(torch.nn.Module):
         # out: (batch_size, seq_len, n_heads * head_dim)
         #    = (batch_size, seq_len, dim)
 
+        out = self.linear(out)
     
         return out
