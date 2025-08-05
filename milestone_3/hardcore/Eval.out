@@ -1,0 +1,27 @@
+Test
+Learning rate: 0.0001, k: 100 -> test perplexity: 51.96405116371911
+Test
+Learning rate: 0.0005, k: 100 -> test perplexity: 36.184124747417904
+Test
+Learning rate: 0.001, k: 100 -> test perplexity: 34.02115555646833
+Test
+Learning rate: 0.0001, k: 200 -> test perplexity: 116.14822555166036
+Test
+Learning rate: 0.0005, k: 200 -> test perplexity: 60.31262235967866
+Test
+Learning rate: 0.001, k: 200 -> test perplexity: 52.265199067775704
+Test
+Learning rate: 0.0001, k: 300 -> test perplexity: 198.03245161646214
+Test
+Learning rate: 0.0005, k: 300 -> test perplexity: 86.18883114787684
+Test
+Learning rate: 0.001, k: 300 -> test perplexity: 68.85538667604982
+Test
+Learning rate: 0.0001, k: 500 -> test perplexity: 409.808096641118
+Test
+Learning rate: 0.0005, k: 500 -> test perplexity: 164.47371997092182
+Test
+Learning rate: 0.001, k: 500 -> test perplexity: 117.54506487691079
+###################
+Best:
+Learning rate: 0.001, k: 100 -> test perplexity: 34.02115555646833
