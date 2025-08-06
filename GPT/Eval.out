@@ -1,0 +1,27 @@
+Test
+Embedding dim: 16, k: 50 -> test perplexity: 16.648710250854492
+Test
+Embedding dim: 32, k: 50 -> test perplexity: 11.280582427978516
+Test
+Embedding dim: 64, k: 50 -> test perplexity: 8.145227432250977
+Test
+Embedding dim: 16, k: 150 -> test perplexity: 34.532894134521484
+Test
+Embedding dim: 32, k: 150 -> test perplexity: 20.773067474365234
+Test
+Embedding dim: 64, k: 150 -> test perplexity: 13.948813438415527
+Test
+Embedding dim: 16, k: 250 -> test perplexity: 51.28538131713867
+Test
+Embedding dim: 32, k: 250 -> test perplexity: 28.815998077392578
+Test
+Embedding dim: 64, k: 250 -> test perplexity: 19.916460037231445
+Test
+Embedding dim: 16, k: 1000 -> test perplexity: 108.4942626953125
+Test
+Embedding dim: 32, k: 1000 -> test perplexity: 77.33943939208984
+Test
+Embedding dim: 64, k: 1000 -> test perplexity: 58.915462493896484
+###################
+Best:
+Learning rate: 64, k: 50 -> test perplexity: 8.145227432250977
