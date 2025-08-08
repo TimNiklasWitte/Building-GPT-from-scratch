@@ -119,7 +119,7 @@ LSTM to incorporate time
 
 ![alt text](./milestone_3/fun/plotting/plots/Perplexity.png)
 
-Best model: Perplexity is about 14 within 4-6 Grams.  
+Best model: Perplexity is about 14 with the Neural 4-Gram.  
 Here we use an LSTM, neural network to capture sequential dependencies and context beyond fixed the previos clasical n-gram windows. Using the LSTM we try to "weight" the importance of each previous token, not just memorize fixed-length patterns. We can see that the perfomance of this N-gram performs slightly better than the previous classic N-grams.
 
 
