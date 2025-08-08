@@ -51,6 +51,10 @@ As you increase k, it adds add more “virtual” counts to every possible next 
 This plot compares three smoothing/backoff strategies as we increase the model order $n$ from unigram (1) to 6-gram (6):  
 Together, these curves trace the progression of our code from basic add-k smoothing (N_Gram_Basic.py), through interpolation (N_Gram_Advanced.py).  
 
+**Interpretation of plots:**  
+Backoff performs best. That might be because it uses higher-order N-grams when sufficient data is available, but gracefully falls back to lower-order models when data is sparse. This allows it to benefit from context without overfitting or assigning zero probabilities.
+Laplace smoothing, on the other hand, adds a fixed count to all possible N-grams, which leads to over-smoothing—especially as n increases. This flattens the probability distribution too much and results in high perplexity for larger N-gram models.
+
 ![alt text](./milestone_2/plots/Perplexity6_GramDifferentK.png)
 
 This chart shows how varying the add-k smoothing constant $𝑘$ in our 6-gram backoff language model affects its test perplexity. At $𝑘=0$, we use pure backoff (no extra smoothing) and achieve the lowest perplexity. As $𝑘$ increases, we add more “virtual” counts to every possible continuation, flattening the conditional distributions and steadily degrading model sharpness, so perplexity climbs almost linearly.  
