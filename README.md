@@ -58,7 +58,10 @@ This sweep underpins the smoothing `get_prob_backoff_logic()` object in 'N_Gram_
 
 ## Generated text
 
-%doto: Refer to `milestone_2/generated_texts` 1-6 to see the progression of the n-gram being used alongside the given smoothing strategy.
+Please note that under milestone_2/generated_texts, you will find generated text samples for N-grams with values of n = 1 to 6. For each N-gram setting, there are examples using the three smoothing strategies: Backoff, Interpolation, and Laplace.
+For each of these smoothing methods, both sample-based and argmax-based predictions are provided.
+
+All text was generated using the context: "hello julia".
 
 # Milestone 3: Neural Bigram
 
