@@ -41,7 +41,7 @@ without exploding our vocab size trying to cover rare full words that hardly eve
 # Milestone 2: N-Gram
 
 ![alt text](./milestone_2/plots/PerplexityBigramDifferentK.png)
-**Bigram Perplexity vs. Add-k Constant**: 
+**Bigram Perplexity vs. Add-k Constant**:  
 Here we fix $n = 2$ (bigram) and vary the Laplace smoothing constant k on the test set:
 At $k=0$ (no extra smoothing), the bigram model achieves its lowest perplexity (~11.1).
 As you increase k, it adds add more “virtual” counts to every possible next word, flattening the distribution and steadily raising perplexity up to ~49 at k=245.
@@ -49,7 +49,7 @@ As you increase k, it adds add more “virtual” counts to every possible next 
 ![alt text](./milestone_2/plots/PerplexityDifferentN.png)
 **Perplexity vs. n-Gram Order**:  
 This plot compares three smoothing/backoff strategies as we increase the model order $n$ from unigram (1) to 6-gram (6):  
-Together, these curves trace the progression of our code from basic add-k smoothing (N_Gram_Basic.py), through nterpolation (N_Gram_Advanced.py).  
+Together, these curves trace the progression of our code from basic add-k smoothing (N_Gram_Basic.py), through interpolation (N_Gram_Advanced.py).  
 
 ![alt text](./milestone_2/plots/Perplexity6_GramDifferentK.png)
 
@@ -63,9 +63,9 @@ This sweep underpins the smoothing `get_prob_backoff_logic()` object in 'N_Gram_
 # Milestone 3: Neural Bigram
 
 
-## Hardcore
+## Hardcore Version (Pythonic implementation)  
 
-Table of learning rate, k value, and corresponding test perplexity for each test case:
+Table of learning rate, k-value, and corresponding test perplexity for each test case:
 
 | Test                 | Learning rate | k   | Test perplexity         |
 | -------------------- | ------------- | --- | ----------------------- |
@@ -85,7 +85,7 @@ Table of learning rate, k value, and corresponding test perplexity for each test
 | **Best:**            |               |     |                         |
 | Learning rate: 0.001 | k: 100        |     | Test perplexity: 34.021 |
 
-## Soft
+## Softer version (PyTorch implimentation)
 
 Hyperparameter search
 
@@ -119,11 +119,13 @@ LSTM to incorporate time
 
 ![alt text](./milestone_3/fun/plotting/plots/Perplexity.png)
 
-Best model: ppl is about 14
+Best model: perplexity is about 14.  
+Here we use an LSTM, neural network to capture sequential dependencies and context beyond fixed the previos clasical n-gram windows. Using the LSTM we try to "weight" the importance of each previous token, not just memorize fixed-length patterns. We can see that the perfomance of this N-gram performs slightly better than the previous classic N-grams.
+
 
 # GPT
 
-According to ./milestone_2/plots/PerplexityBigramDifferentK.png, ./milestone_2/plots/Perplexity6_GramDifferentK.png
+According to `./milestone_2/plots/PerplexityBigramDifferentK.png, ./milestone_2/plots/Perplexity6_GramDifferentK.png
 ppl is increasing with vocab size 
 -> artifact of sparsity
 -> tryout k values of equal space intervals -> 100, 150, 250 and 2000 (just to see what happens with large k)
