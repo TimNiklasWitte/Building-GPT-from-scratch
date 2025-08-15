@@ -205,6 +205,7 @@ wait for the results :)
 #### Hardcore Version
 
 ***learning rate: 0.001***
+
 *k = 100*
 ![alt text](./milestone_3/hardcore/plots/0.001_100.png)
 *k = 300*
@@ -213,6 +214,7 @@ wait for the results :)
 ![alt text](./milestone_3/hardcore/plots/0.001_500.png)
 
 ***learning rate: 0.0001***
+
 *k = 100*
 ![alt text](./milestone_3/hardcore/plots/0.0001_100.png)
 *k = 300*
@@ -221,6 +223,7 @@ wait for the results :)
 ![alt text](./milestone_3/hardcore/plots/0.0001_500.png)
 
 ***learning rate: 0.0005***
+
 *k = 100*
 ![alt text](./milestone_3/hardcore/plots/0.0005_100.png)
 *k = 300*
@@ -232,6 +235,7 @@ wait for the results :)
 #### Soft Version
 
 ***learning rate: 0.001***
+
 *k = 100*
 ![alt text](./milestone_3/soft/plotting/plots/0.001_100.png)
 *k = 300*
@@ -240,6 +244,7 @@ wait for the results :)
 ![alt text](./milestone_3/soft/plotting//plots/0.001_500.png)
 
 ***learning rate: 0.0001***
+
 *k = 100*
 ![alt text](./milestone_3/soft/plotting//plots/0.0001_100.png)
 *k = 300*
@@ -248,6 +253,7 @@ wait for the results :)
 ![alt text](./milestone_3/soft/plotting//plots/0.0001_500.png)
 
 ***learning rate: 0.0005***
+
 *k = 100*
 ![alt text](./milestone_3/soft/plotting//plots/0.0005_100.png)
 *k = 300*
