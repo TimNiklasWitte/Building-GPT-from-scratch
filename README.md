@@ -169,6 +169,18 @@ Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperfo
 
 # GPT
 
+### Embedding Dimensions = 16
+
+![alt text](./GPT/plotting/plots/16_50.png)
+![alt text](./GPT/plotting/plots/16_250.png)
+![alt text](./GPT/plotting/plots/16_1000.png)
+
+### Embedding Dimensions = 64
+
+![alt text](./GPT/plotting/plots/64_50.png)
+![alt text](./GPT/plotting/plots/64_250.png)
+![alt text](./GPT/plotting/plots/64_1000.png)
+
 According to `./milestone_2/plots/PerplexityBigramDifferentK.png, ./milestone_2/plots/Perplexity6_GramDifferentK.png
 ppl is increasing with vocab size 
 -> artifact of sparsity
