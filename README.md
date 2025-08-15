@@ -70,10 +70,8 @@ All text was generated using the context: "hello julia".
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Backoff – Argmax**             | `hello julia patatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatata`                     |
 | **Backoff – Sampling**           | `hello julia ommued[shu/strecodooff it ma_an rk hiy, wich eard .`                                                                      |
-|                                  |                                                                                                                                        |
 | **Laplace Smoothing – Argmax**   | `hello julia patatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatata`                     |
 | **Laplace Smoothing – Sampling** | `hello julia perenmanif ost not your sweyex'somevansp, ssce thinuo me you {t, tis and serk to you.`                                    |
-|                                  |                                                                                                                                        |
 | **Interpolation – Argmax**       | `hello julia patatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatata`                     |
 | **Interpolation – Sampling**     | `hello julia what haivod ce to love you ourd with hamo, and w; ouly e]is entexit dius ence, thou n th, with a ?thoueak iltodest's ...` |
 
