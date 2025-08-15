@@ -169,17 +169,22 @@ Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperfo
 
 # GPT
 
+The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK.png or ./milestone_2/plots/Perplexity6_GramDifferentK.png) suggest that the perplexity is increase with the vocab size because of the artifact of sparsity. So we tried out differte k values (50, 150, 250 and 1000) over different embedding sizes (16, 32, 64)
+
 ### Embedding Dimensions = 16
 
 ![alt text](./GPT/plotting/plots/16_50.png)
 ![alt text](./GPT/plotting/plots/16_250.png)
-![alt text](./GPT/plotting/plots/16_1000.png)
+
 
 ### Embedding Dimensions = 64
 
 ![alt text](./GPT/plotting/plots/64_50.png)
 ![alt text](./GPT/plotting/plots/64_250.png)
-![alt text](./GPT/plotting/plots/64_1000.png)
+
+
+
+
 
 According to `./milestone_2/plots/PerplexityBigramDifferentK.png, ./milestone_2/plots/Perplexity6_GramDifferentK.png
 ppl is increasing with vocab size 
@@ -195,7 +200,81 @@ wait for the results :)
 
 # Appendix
 
+### Milestone 3: Loss and Perplex among different learning rates and k
+
+#### Hardcore Version
+
+***learning rate: 0.001***
+*k = 100*
+![alt text](./milestone_3/hardcore/plots/0.001_100.png)
+*k = 300*
+![alt text](./milestone_3/hardcore/plots/0.001_300.png)
+*k = 500*
+![alt text](./milestone_3/hardcore/plots/0.001_500.png)
+
+***learning rate: 0.0001***
+*k = 100*
+![alt text](./milestone_3/hardcore/plots/0.0001_100.png)
+*k = 300*
+![alt text](./milestone_3/hardcore/plots/0.0001_300.png)
+*k = 500*
+![alt text](./milestone_3/hardcore/plots/0.0001_500.png)
+
+***learning rate: 0.0005***
+*k = 100*
+![alt text](./milestone_3/hardcore/plots/0.0005_100.png)
+*k = 300*
+![alt text](./milestone_3/hardcore/plots/0.0005_300.png)
+*k = 500*
+![alt text](./milestone_3/hardcore/plots/0.0005_500.png)
+
+
+#### Soft Version
+
+***learning rate: 0.001***
+*k = 100*
+![alt text](./milestone_3/soft/plotting/plots/0.001_100.png)
+*k = 300*
+![alt text](./milestone_3/soft/plotting//plots/0.001_300.png)
+*k = 500*
+![alt text](./milestone_3/soft/plotting//plots/0.001_500.png)
+
+***learning rate: 0.0001***
+*k = 100*
+![alt text](./milestone_3/soft/plotting//plots/0.0001_100.png)
+*k = 300*
+![alt text](./milestone_3/soft/plotting//plots/0.0001_300.png)
+*k = 500*
+![alt text](./milestone_3/soft/plotting//plots/0.0001_500.png)
+
+***learning rate: 0.0005***
+*k = 100*
+![alt text](./milestone_3/soft/plotting//plots/0.0005_100.png)
+*k = 300*
+![alt text](./milestone_3/soft/plotting//plots/0.0005_300.png)
+*k = 500*
+![alt text](./milestone_3/soft/plotting//plots/0.0005_500.png)
+
 %doto milestone_2/soft/plots here
 %doto milestone_2/hardcore/plots here
+
+### GPT
+Embedding Size 16 on different k:
+![alt text](./GPT/plotting/plots/16_50.png)
+![alt text](./GPT/plotting/plots/16_150.png)
+![alt text](./GPT/plotting/plots/16_250.png)
+![alt text](./GPT/plotting/plots/16_1000.png)
+
+Embedding Size 32 on different k:
+![alt text](./GPT/plotting/plots/32_50.png)
+![alt text](./GPT/plotting/plots/32_150.png)
+![alt text](./GPT/plotting/plots/32_250.png)
+![alt text](./GPT/plotting/plots/32_1000.png)
+
+Embedding Size 64 on different k:
+![alt text](./GPT/plotting/plots/64_50.png)
+![alt text](./GPT/plotting/plots/64_150.png)
+![alt text](./GPT/plotting/plots/64_250.png)
+![alt text](./GPT/plotting/plots/64_1000.png)
 
 
