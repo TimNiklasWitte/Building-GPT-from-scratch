@@ -62,10 +62,45 @@ This sweep underpins the smoothing `get_prob_backoff_logic()` object in 'N_Gram_
 
 ## Generated text
 
-Please note that under milestone_2/generated_texts, you will find generated text samples for N-grams with values of n = 1 to 6. For each N-gram setting, there are examples using the three smoothing strategies: Backoff, Interpolation, and Laplace.
-For each of these smoothing methods, both sample-based and argmax-based predictions are provided.
-
 All text was generated using the context: "hello julia".
+
+### Bigram 
+
+| Model & Method                   | Generated text                                                                                                                         |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Backoff – Argmax**             | `hello julia patatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatata`                     |
+| **Backoff – Sampling**           | `hello julia ommued[shu/strecodooff it ma_an rk hiy, wich eard .`                                                                      |
+|                                  |                                                                                                                                        |
+| **Laplace Smoothing – Argmax**   | `hello julia patatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatata`                     |
+| **Laplace Smoothing – Sampling** | `hello julia perenmanif ost not your sweyex'somevansp, ssce thinuo me you {t, tis and serk to you.`                                    |
+|                                  |                                                                                                                                        |
+| **Interpolation – Argmax**       | `hello julia patatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatata`                     |
+| **Interpolation – Sampling**     | `hello julia what haivod ce to love you ourd with hamo, and w; ouly e]is entexit dius ence, thou n th, with a ?thoueak iltodest's ...` |
+
+As we can see a bigram model only considers the last single token when predicting the next one. This extremely limited context cannot capture long-range dependencies, so the generated text quickly devolves into locally probable but globally incoherent token sequences.
+In these examples, we see very strong self-loops or dominant transitions (e.g., "julia" → "patata"). Argmax always picks the single most probable continuation, so regardless of the smoothing or interpolation strategy, the model locks into the same repetitive loop. This effect is strongest for bigrams because the model only considers one previous token. If a single word has a highly probable self-loop or dominant successor, Argmax will choose it every time, creating an immediate repetition loop.
+
+### 6-Gram Backoff:
+
+| Modell & Methode                 | Generierter Text                                                                                                                                                        |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Backoff – Argmax**             | `hello julia i will not leave their tinct.`                                                                                                                             |
+| **Backoff – Sampling**           | `hello julia worshiearabut er +e hike disoul; be hamark , the shy, whipthpthere ablius cir pge in the fraulauke strth no d, wearbenck {but we ouursemato't for th ~.  ` |
+
+Higher-order n-grams (here 6-grams) use a longer context, so the dominant continuation changes as the context changes, making endless repetition far less likely. Backoff strengthens the effect by reducing the window size if the context is unkown. 
+Here we can cleary see, that the argmax outcome seems far more realistic. Thats because sampling, on the other hand, occasionally picks lower-probability continuations. In a small dataset like Shakespeare’s, these rare continuations are often poorly estimated or spurious due to data sparsity.
+
+### 6-Gram Laplace-Smoothing:
+
+| Modell & Methode                 | Generierter Text                                                                                                                                                        |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Laplace-Smoothing – Argmax**   | `hello julia with with with with with with with with with with with with with with with with with with with with with with with with with with with with with with[...]`|
+| **Laplace-Smoothing – Sampling** | `hello julia lidisithoucst and youc0]#on +ringyou gwixsi#ri]cu#wiyouo s}sif may}, \; chdforat 3on fd w(j;lfornoh? "en ch 94ch -nmy an ashllseforle.`                    |
+
+For Laplace-Smoothing however we again see the repetions regardles the higher-order n-gram. Thats because it adds a constant to all counts, flattening the distribution. This leads to overly uniform probabilities and, in Argmax mode, can produce pathological repetition because certain high-count tokens remain dominant regardless of broader context.
+
+Please note that under milestone_2/generated_texts, you will find more generated text samples for N-grams with values of n = 1 to 6. For each N-gram setting, there are examples using the three smoothing strategies: Backoff, Interpolation, and Laplace.
+For each of these smoothing methods, both sample-based and argmax-based predictions are provided.
 
 # Milestone 3: Neural Bigram
 
@@ -129,6 +164,10 @@ LSTM to incorporate time
 Best model: Perplexity is about 14 with the Neural 4-Gram.  
 Here we use an LSTM, neural network to capture sequential dependencies and context beyond fixed the previos clasical n-gram windows. Using the LSTM we try to "weight" the importance of each previous token, not just memorize fixed-length patterns. We can see that the perfomance of this N-gram performs slightly better than the previous classic N-grams.
 
+## Comparing Neural N-Gram with the classic N-Gram
+
+Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperformed the neural 4-gram model (perplexity ≈ 14), even though both were trained solely on Shakespeare. The key factor is data sparsity: the backoff mechanism in the classic model directly addresses sparsity by reverting to lower-order n-grams (n-1, n-2, etc.) when higher-order contexts are unavailable. In contrast, the neural n-gram must learn through backpropagation how to handle sparse data — a challenging task given the small, domain-specific training corpus. It is likely that, with a substantially larger and more diverse dataset, the neural n-gram would surpass the classic backoff model in terms of perplexity.
+
 
 # GPT
 
@@ -142,6 +181,7 @@ Different embedding sizes: 16, 32, 64
 
 wait for the results :)
 
+## Comparing GPT with Neural N-Gram and classic N-Gram
 
 # Appendix
 
