@@ -13,6 +13,7 @@ class GPT(torch.nn.Module):
     def __init__(self, block_size, vocab_size, emb_dim):
         super(GPT, self).__init__()
 
+        self.block_size = block_size
         self.vocab_size = vocab_size
 
         #
@@ -68,7 +69,7 @@ class GPT(torch.nn.Module):
         
         batch_size, seq_len = x.shape
         
-        x = self.token_embedding(x) + self.pos_embedding
+        x = self.token_embedding(x) + self.pos_embedding[:, :seq_len, :]
 
         x = self.dropout(x)
 
