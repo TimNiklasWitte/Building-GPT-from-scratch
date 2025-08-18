@@ -183,20 +183,19 @@ The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK
 ![alt text](./GPT/plotting/plots/64_250.png)
 
 
+### Effect of embedding dimension.
 
+The results show that models with larger embedding dimensions achieve consistently lower loss and perplexity compared to those with smaller embeddings. The reason is that larger embeddings provide richer vector representations of tokens, allowing the model to capture more subtle syntactic and semantic dependencies. The difference becomes visible because a 16-dimensional embedding is too restrictive: it cannot encode the variety of contexts needed for reliable predictions. A 64-dimensional embedding, in contrast, gives the model enough representational capacity to generalize better from the limited data, which explains the substantially improved perplexity curves. Also it needs less epoch to be trained.
 
+### Effect of vocabulary size (k)
 
-According to `./milestone_2/plots/PerplexityBigramDifferentK.png, ./milestone_2/plots/Perplexity6_GramDifferentK.png
-ppl is increasing with vocab size 
--> artifact of sparsity
--> tryout k values of equal space intervals -> 100, 150, 250 and 2000 (just to see what happens with large k)
-
-Different embedding sizes: 16, 32, 64
-
-
-wait for the results :)
+Across both embedding dimensions, smaller vocabulary sizes (k=50) result in significantly lower perplexity compared to larger vocabularies (k=250 or beyond). As already explained above, the explanation lies in data sparsity: with a small corpus like Shakespeare, increasing k means that many tokens and token combinations appear very rarely, making it difficult for the model to learn stable probability estimates. With fewer tokens (small k), each token appears more frequently, allowing the model to estimate distributions more reliably and reduce uncertainty. Thus, while larger embeddings help, they cannot fully overcome the sparsity introduced by large vocabularies on such a limited dataset.
 
 ## Comparing GPT with Neural N-Gram and classic N-Gram
+
+The 6-gram backoff model achieves the best performance in terms of perplexity (as low as ~5), especially with small vocabularies. This surprisingly strong result arises because backoff n-grams effectively memorize frequent local patterns in the small and repetitive Shakespeare dataset, where many 6-token contexts reappear exactly. The backoff mechanism further mitigates sparsity by reverting to shorter histories when necessary, making predictions robust. However, this advantage is largely an artifact of memorization and does not generalize well: as the vocabulary size grows, sparsity dominates and perplexity increases almost linearly.
+
+By contrast, the Transformer excels in principle because it can capture long-range dependencies and leverage embeddings for richer representations, but on this small dataset its capacity is underutilized. Instead of memorizing, it must learn probabilistic structure for many rare contexts, which keeps its perplexity higher than that of the n-gram backoff despite its more advanced architecture. The neural bigram performs worst overall, as it is bottlenecked by the extremely short context of only one token. The neural n-gram with LSTM offers a middle ground
 
 # Appendix
 
