@@ -18,13 +18,12 @@ from Neural_N_Gram import *
 
 
 import sys
-sys.path.append("./../milestone_1")
+sys.path.append("./../../milestone_1")
 from BytePairEncoding import *
 
 NUM_EPOCHS = 32
-BATCH_SIZE = 32
-NUM_THREADS = 10
-VOCAB_SIZE = 100
+BATCH_SIZE = 128
+NUM_THREADS = 16
 
 def main():
 
@@ -37,11 +36,10 @@ def main():
     # Logging
     #
     
-    seq_len = int(sys.argv[1])
-   
-    print(seq_len)
+    k = int(sys.argv[1])
+    seq_len = int(sys.argv[2])
     
-    file_path = f"./logs/{seq_len}"
+    file_path = f"./logs/{k}/{seq_len}"
 
     writer = SummaryWriter(file_path)
     
@@ -50,12 +48,12 @@ def main():
     #
 
     # Train
-    file_path = "./../data/Shakespeare_clean_train.txt"
+    file_path = "./../../data/Shakespeare_clean_train.txt"
     with open(file_path) as file:
         corpus_train = file.read()
 
     # Test
-    file_path = "./../data/Shakespeare_clean_test.txt"
+    file_path = "./../../data/Shakespeare_clean_test.txt"
     with open(file_path) as file:
         corpus_test = file.read()
 
@@ -63,7 +61,7 @@ def main():
     # Tokenization
     #
 
-    bpe = BytePairEncoding(num_types=VOCAB_SIZE)
+    bpe = BytePairEncoding(num_types=k)
 
     bpe.train(corpus_train)
 
