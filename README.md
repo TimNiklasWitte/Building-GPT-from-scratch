@@ -225,7 +225,7 @@ By contrast, the Transformer excels in principle because it can capture long-ran
 
 # Appendix
 
-### Milestone 3: Loss and Perplex among different learning rates and k
+### Milestone 3: Loss and Perplexity among different learning rates and k
 
 #### Hardcore Version
 
@@ -290,19 +290,19 @@ By contrast, the Transformer excels in principle because it can capture long-ran
 %doto milestone_2/hardcore/plots here
 
 ### GPT
-Embedding Size 16 on different k:
+### Embedding Size 16 on different k:  
 ![alt text](./GPT/plotting/plots/16_50.png)
 ![alt text](./GPT/plotting/plots/16_150.png)
 ![alt text](./GPT/plotting/plots/16_250.png)
 ![alt text](./GPT/plotting/plots/16_1000.png)
 
-Embedding Size 32 on different k:
+### Embedding Size 32 on different k:  
 ![alt text](./GPT/plotting/plots/32_50.png)
 ![alt text](./GPT/plotting/plots/32_150.png)
 ![alt text](./GPT/plotting/plots/32_250.png)
 ![alt text](./GPT/plotting/plots/32_1000.png)
 
-Embedding Size 64 on different k:
+### Embedding Size 64 on different k:  
 ![alt text](./GPT/plotting/plots/64_50.png)
 ![alt text](./GPT/plotting/plots/64_150.png)
 ![alt text](./GPT/plotting/plots/64_250.png)
