@@ -106,7 +106,7 @@ For each of these smoothing methods, both sample-based and argmax-based predicti
 
 Table of learning rate, k-value, and corresponding test perplexity for each test case:
 
-| Learning rate | k   | Test perplexity         |
+| Learning rate | k   | perplexity         |
 | ------------- | --- | ----------------------- |
 | 0.0001        | 100 | 51.96405116371911       |
 | 0.0005        | 100 | 36.184124747417904      |
@@ -122,7 +122,7 @@ Table of learning rate, k-value, and corresponding test perplexity for each test
 | 0.001         | 500 | 117.54506487691079      |
 |               |     |                         |
 | **Best:**                                     |
-| Learning rate = 0.001 | k = 100 | Test perplexity = **34.021** |
+| Learning rate = 0.001 | k = 100 | perplexity = **34.021** |
 
 ## Softer version (PyTorch implimentation)
 
@@ -130,7 +130,7 @@ Hyperparameter search
 
 Table of learning rate, k value, and corresponding test perplexity for each test case:
 
-| Learning rate | k   | Test perplexity         |
+| Learning rate | k   | perplexity
 | ------------- | --- | ----------------------- |
 | 0.0001        | 100 | 33.212650299072266      |
 | 0.0005        | 100 | **32.912742614746094**      |
@@ -146,7 +146,7 @@ Table of learning rate, k value, and corresponding test perplexity for each test
 | 0.001         | 500 | 79.92401885986328       |
 |               |     |                         |
 | **Best:**                                     |
-| Learning rate = 0.0005 | k = 100 | Test perplexity = **32.912** |
+| Learning rate = 0.0005 | k = 100 | perplexity = **32.912** |
 
 
 The comparison between the "Hardcore" and "softer" version of implementing the embeddings shows an aproximate 3.3% increase in perplexity score result (Absolute drop: −1.109 perplexity points).
