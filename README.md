@@ -172,6 +172,27 @@ Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperfo
 
 The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK.png or ./milestone_2/plots/Perplexity6_GramDifferentK.png) suggest that the perplexity is increase with the vocab size because of the artifact of sparsity. So we tried out differte k values (50, 150, 250 and 1000) over different embedding sizes (16, 32, 64)
 
+### Perplexity Results for the Test Set
+
+### Perplexity Results (Test Set)
+
+| Embedding Dim | Vocab Size (k) | Test Perplexity |
+|---------------|----------------|-----------------|
+| 16            | 50             | 16.65           |
+| 32            | 50             | 11.28           |
+| 64            | 50             | **8.15**        |
+| 16            | 150            | 34.53           |
+| 32            | 150            | 20.77           |
+| 64            | 150            | 13.95           |
+| 16            | 250            | 51.29           |
+| 32            | 250            | 28.82           |
+| 64            | 250            | 19.92           |
+| 16            | 1000           | 108.49          |
+| 32            | 1000           | 77.34           |
+| 64            | 1000           | 58.92           |
+
+**Best Result:** Embedding dim = 64, k = 50 → Test Perplexity = **8.15**
+
 ### Embedding Dimensions = 16
 
 ![alt text](./GPT/plotting/plots/16_50.png)
