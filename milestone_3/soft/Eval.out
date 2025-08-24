@@ -1,26 +1,26 @@
-Test
+
 Learning rate: 0.0001, k: 100 -> test perplexity: 33.212650299072266
-Test
+
 Learning rate: 0.0005, k: 100 -> test perplexity: 32.912742614746094
-Test
+
 Learning rate: 0.001, k: 100 -> test perplexity: 33.70339584350586
-Test
+
 Learning rate: 0.0001, k: 200 -> test perplexity: 48.84163284301758
-Test
+
 Learning rate: 0.0005, k: 200 -> test perplexity: 48.04667663574219
-Test
+
 Learning rate: 0.001, k: 200 -> test perplexity: 49.09096145629883
-Test
+
 Learning rate: 0.0001, k: 300 -> test perplexity: 59.62310791015625
-Test
+
 Learning rate: 0.0005, k: 300 -> test perplexity: 57.317710876464844
-Test
+
 Learning rate: 0.001, k: 300 -> test perplexity: 59.76580810546875
-Test
+
 Learning rate: 0.0001, k: 500 -> test perplexity: 82.57501220703125
-Test
+
 Learning rate: 0.0005, k: 500 -> test perplexity: 76.4788818359375
-Test
+
 Learning rate: 0.001, k: 500 -> test perplexity: 79.92401885986328
 ###################
 Best:
