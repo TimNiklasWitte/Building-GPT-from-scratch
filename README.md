@@ -111,7 +111,7 @@ Table of learning rate, k-value, and corresponding test perplexity for each test
 | ------------- | --- | ----------------------- |
 | 0.0001        | 100 | 51.96405116371911       |
 | 0.0005        | 100 | 36.184124747417904      |
-| 0.001         | 100 | 34.02115555646833       |
+| 0.001         | 100 | **34.02115555646833**      |
 | 0.0001        | 200 | 116.14822555166036      |
 | 0.0005        | 200 | 60.31262235967866       |
 | 0.001         | 200 | 52.265199067775704      |
@@ -134,7 +134,7 @@ Table of learning rate, k value, and corresponding test perplexity for each test
 | Learning rate | k   | Test perplexity         |
 | ------------- | --- | ----------------------- |
 | 0.0001        | 100 | 33.212650299072266      |
-| 0.0005        | 100 | 32.912742614746094      |
+| 0.0005        | 100 | **32.912742614746094**      |
 | 0.001         | 100 | 33.70339584350586       |
 | 0.0001        | 200 | 48.84163284301758       |
 | 0.0005        | 200 | 48.04667663574219       |
@@ -147,7 +147,7 @@ Table of learning rate, k value, and corresponding test perplexity for each test
 | 0.001         | 500 | 79.92401885986328       |
 |               |     |                         |
 | **Best:**                                     |
-| Learning rate: 0.0005 | k: 100 | Test perplexity: 32.912 |
+| Learning rate: 0.0005 | k: 100 | Test perplexity: **32.912** |
 
 
 The comparison between the "Hardcore" and "softer" version of implementing the embeddings shows an aproximate 3.3% increase in perplexity score result (Absolute drop: −1.109 perplexity points).
@@ -190,8 +190,8 @@ The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK
 | 16            | 1000           | 108.49          |
 | 32            | 1000           | 77.34           |
 | 64            | 1000           | 58.92           |
-
-**Best Result:** Embedding dim = 64, k = 50 → Test Perplexity = **8.15**
+| **Best:**                                        |
+|Embedding dim = 64 | k = 50 | Test Perplexity = **8.15**|
 
 ### Embedding Dimensions = 16
 
