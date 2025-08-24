@@ -123,7 +123,7 @@ Table of learning rate, k-value, and corresponding test perplexity for each test
 | 0.001         | 500 | 117.54506487691079      |
 |               |     |                         |
 | **Best:**                                     |
-| Learning rate: 0.001 | k: 100 | Test perplexity: 34.021 |
+| Learning rate: 0.001 | k: 100 | Test perplexity: **34.021** |
 
 ## Softer version (PyTorch implimentation)
 
