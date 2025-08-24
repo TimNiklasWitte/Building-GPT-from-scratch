@@ -169,7 +169,7 @@ Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperfo
 
 # GPT
 
-The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK.png or ./milestone_2/plots/Perplexity6_GramDifferentK.png) suggest that the perplexity is increase with the vocab size because of the artifact of sparsity. So we tried out differte k values (50, 150, 250 and 1000) over different embedding sizes (16, 32, 64)
+The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK.png or ./milestone_2/plots/Perplexity6_GramDifferentK.png) suggest that the perplexity increases with the vocab size because of the artifact of sparsity. So we tried out differte k values (50, 150, 250 and 1000) over different embedding sizes (16, 32, 64)
 
 ### Perplexity Results for the test set
 
@@ -240,7 +240,15 @@ Under /GPT/generated_texts/{emb_dim}_{k} you can find all the generated texts ba
 
 The 6-gram backoff model achieves the best performance in terms of perplexity (as low as ~5), especially with small vocabularies. This surprisingly strong result arises because backoff n-grams effectively memorize frequent local patterns in the small and repetitive Shakespeare dataset, where many 6-token contexts reappear exactly. The backoff mechanism further mitigates sparsity by reverting to shorter histories when necessary, making predictions robust. However, this advantage is largely an artifact of memorization and does not generalize well: as the vocabulary size grows, sparsity dominates and perplexity increases almost linearly.
 
-By contrast, the Transformer excels in principle because it can capture long-range dependencies and leverage embeddings for richer representations, but on this small dataset its capacity is underutilized. Instead of memorizing, it must learn probabilistic structure for many rare contexts, which keeps its perplexity higher than that of the n-gram backoff despite its more advanced architecture. The neural bigram performs worst overall, as it is bottlenecked by the extremely short context of only one token. The neural n-gram with LSTM offers a middle ground
+By contrast, the Transformer excels in principle because it can capture long-range dependencies and leverage embeddings for richer representations, but on this small dataset its capacity is underutilized. Instead of memorizing, it must learn probabilistic structure for many rare contexts, which keeps its perplexity higher than that of the n-gram backoff despite its more advanced architecture. The neural bigram performs worst overall, as it is bottlenecked by the extremely short context of only one token. The neural n-gram with LSTM offers a middle ground. 
+
+Final comparison:  
+| Classi N-gram | Neural N-Gram | Transformer |
+|---------------|----------------|-----------------|
+
+
+
+
 
 # Appendix
 
