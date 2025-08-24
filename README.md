@@ -243,9 +243,15 @@ The 6-gram backoff model achieves the best performance in terms of perplexity (a
 By contrast, the Transformer excels in principle because it can capture long-range dependencies and leverage embeddings for richer representations, but on this small dataset its capacity is underutilized. Instead of memorizing, it must learn probabilistic structure for many rare contexts, which keeps its perplexity higher than that of the n-gram backoff despite its more advanced architecture. The neural bigram performs worst overall, as it is bottlenecked by the extremely short context of only one token. The neural n-gram with LSTM offers a middle ground. 
 
 Final comparison:  
-| Classi N-gram | Neural N-Gram | Transformer |
+| Classic N-gram | Neural N-Gram | Transformer |
 |---------------|----------------|-----------------|
-
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
 
 
 
