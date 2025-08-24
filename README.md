@@ -102,7 +102,6 @@ For each of these smoothing methods, both sample-based and argmax-based predicti
 
 # Milestone 3: Neural Bigram
 
-
 ## Hardcore Version (Pythonic implementation)  
 
 Table of learning rate, k-value, and corresponding test perplexity for each test case:
@@ -123,7 +122,7 @@ Table of learning rate, k-value, and corresponding test perplexity for each test
 | 0.001         | 500 | 117.54506487691079      |
 |               |     |                         |
 | **Best:**                                     |
-| Learning rate: 0.001 | k: 100 | Test perplexity: **34.021** |
+| Learning rate = 0.001 | k = 100 | Test perplexity = **34.021** |
 
 ## Softer version (PyTorch implimentation)
 
@@ -147,7 +146,7 @@ Table of learning rate, k value, and corresponding test perplexity for each test
 | 0.001         | 500 | 79.92401885986328       |
 |               |     |                         |
 | **Best:**                                     |
-| Learning rate: 0.0005 | k: 100 | Test perplexity: **32.912** |
+| Learning rate = 0.0005 | k = 100 | Test perplexity = **32.912** |
 
 
 The comparison between the "Hardcore" and "softer" version of implementing the embeddings shows an aproximate 3.3% increase in perplexity score result (Absolute drop: −1.109 perplexity points).
