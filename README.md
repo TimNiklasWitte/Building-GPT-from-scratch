@@ -190,6 +190,7 @@ The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK
 | 16            | 1000           | 108.49          |
 | 32            | 1000           | 77.34           |
 | 64            | 1000           | 58.92           |
+|                                                  |
 | **Best:**                                        |
 |Embedding dim = 64 | k = 50 | Test Perplexity = **8.15**|
 
