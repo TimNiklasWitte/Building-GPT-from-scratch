@@ -79,6 +79,13 @@ def main():
 
     x_values = list(range(1, 7))
 
+    print("Laplace smoothing:")
+    print(perplexity_laplace_list)
+    print("Interpolation:")
+    print(perplexity_interpolation_list)
+    print("Backoff:")
+    print(perplexity_backoff_list)
+
     plt.plot(x_values, perplexity_laplace_list, label="Laplace smoothing")
     plt.plot(x_values, perplexity_interpolation_list, label="Interpolation")
     plt.plot(x_values, perplexity_backoff_list, label="Backoff")
