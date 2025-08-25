@@ -102,28 +102,27 @@ For each of these smoothing methods, both sample-based and argmax-based predicti
 
 # Milestone 3: Neural Bigram
 
-
 ## Hardcore Version (Pythonic implementation)  
 
 Table of learning rate, k-value, and corresponding test perplexity for each test case:
 
-| Test                 | Learning rate | k   | Test perplexity         |
-| -------------------- | ------------- | --- | ----------------------- |
-| Test                 | 0.0001        | 100 | 51.96405116371911       |
-| Test                 | 0.0005        | 100 | 36.184124747417904      |
-| Test                 | 0.001         | 100 | 34.02115555646833       |
-| Test                 | 0.0001        | 200 | 116.14822555166036      |
-| Test                 | 0.0005        | 200 | 60.31262235967866       |
-| Test                 | 0.001         | 200 | 52.265199067775704      |
-| Test                 | 0.0001        | 300 | 198.03245161646214      |
-| Test                 | 0.0005        | 300 | 86.18883114787684       |
-| Test                 | 0.001         | 300 | 68.85538667604982       |
-| Test                 | 0.0001        | 500 | 409.808096641118        |
-| Test                 | 0.0005        | 500 | 164.47371997092182      |
-| Test                 | 0.001         | 500 | 117.54506487691079      |
-|                      |               |     |                         |
-| **Best:**            |               |     |                         |
-| Learning rate: 0.001 | k: 100        |     | Test perplexity: 34.021 |
+| Learning rate | k   | perplexity         |
+| ------------- | --- | ----------------------- |
+| 0.0001        | 100 | 51.96405116371911       |
+| 0.0005        | 100 | 36.184124747417904      |
+| 0.001         | 100 | **34.02115555646833**      |
+| 0.0001        | 200 | 116.14822555166036      |
+| 0.0005        | 200 | 60.31262235967866       |
+| 0.001         | 200 | 52.265199067775704      |
+| 0.0001        | 300 | 198.03245161646214      |
+| 0.0005        | 300 | 86.18883114787684       |
+| 0.001         | 300 | 68.85538667604982       |
+| 0.0001        | 500 | 409.808096641118        |
+| 0.0005        | 500 | 164.47371997092182      |
+| 0.001         | 500 | 117.54506487691079      |
+|               |     |                         |
+| **Best:**                                     |
+| Learning rate = 0.001 | k = 100 | perplexity = **34.021** |
 
 ## Softer version (PyTorch implimentation)
 
@@ -131,23 +130,23 @@ Hyperparameter search
 
 Table of learning rate, k value, and corresponding test perplexity for each test case:
 
-| Test                  | Learning rate | k   | Test perplexity         |
-| --------------------- | ------------- | --- | ----------------------- |
-| Test                  | 0.0001        | 100 | 33.212650299072266      |
-| Test                  | 0.0005        | 100 | 32.912742614746094      |
-| Test                  | 0.001         | 100 | 33.70339584350586       |
-| Test                  | 0.0001        | 200 | 48.84163284301758       |
-| Test                  | 0.0005        | 200 | 48.04667663574219       |
-| Test                  | 0.001         | 200 | 49.09096145629883       |
-| Test                  | 0.0001        | 300 | 59.62310791015625       |
-| Test                  | 0.0005        | 300 | 57.317710876464844      |
-| Test                  | 0.001         | 300 | 59.76580810546875       |
-| Test                  | 0.0001        | 500 | 82.57501220703125       |
-| Test                  | 0.0005        | 500 | 76.4788818359375        |
-| Test                  | 0.001         | 500 | 79.92401885986328       |
-|                       |               |     |                         |
-| **Best:**             |               |     |                         |
-| Learning rate: 0.0005 | k: 100        |     | Test perplexity: 32.912 |
+| Learning rate | k   | perplexity
+| ------------- | --- | ----------------------- |
+| 0.0001        | 100 | 33.212650299072266      |
+| 0.0005        | 100 | **32.912742614746094**      |
+| 0.001         | 100 | 33.70339584350586       |
+| 0.0001        | 200 | 48.84163284301758       |
+| 0.0005        | 200 | 48.04667663574219       |
+| 0.001         | 200 | 49.09096145629883       |
+| 0.0001        | 300 | 59.62310791015625       |
+| 0.0005        | 300 | 57.317710876464844      |
+| 0.001         | 300 | 59.76580810546875       |
+| 0.0001        | 500 | 82.57501220703125       |
+| 0.0005        | 500 | 76.4788818359375        |
+| 0.001         | 500 | 79.92401885986328       |
+|               |     |                         |
+| **Best:**                                     |
+| Learning rate = 0.0005 | k = 100 | perplexity = **32.912** |
 
 
 The comparison between the "Hardcore" and "softer" version of implementing the embeddings shows an aproximate 3.3% increase in perplexity score result (Absolute drop: −1.109 perplexity points).
@@ -162,6 +161,7 @@ LSTM to incorporate time
 Best model: Perplexity is about 14 with the Neural 4-Gram.  
 Here we use an LSTM, neural network to capture sequential dependencies and context beyond fixed the previos clasical n-gram windows. Using the LSTM we try to "weight" the importance of each previous token, not just memorize fixed-length patterns. We can see that the perfomance of this N-gram performs slightly better than the previous classic N-grams.
 
+
 ## Comparing Neural N-Gram with the classic N-Gram
 
 Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperformed the neural 4-gram model (perplexity ≈ 14), even though both were trained solely on Shakespeare. The key factor is data sparsity: the backoff mechanism in the classic model directly addresses sparsity by reverting to lower-order n-grams (n-1, n-2, etc.) when higher-order contexts are unavailable. In contrast, the neural n-gram must learn through backpropagation how to handle sparse data — a challenging task given the small, domain-specific training corpus. It is likely that, with a substantially larger and more diverse dataset, the neural n-gram would surpass the classic backoff model in terms of perplexity.
@@ -169,7 +169,27 @@ Interestingly, the classic 4-gram model with backoff (perplexity ≈ 7) outperfo
 
 # GPT
 
-The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK.png or ./milestone_2/plots/Perplexity6_GramDifferentK.png) suggest that the perplexity is increase with the vocab size because of the artifact of sparsity. So we tried out differte k values (50, 150, 250 and 1000) over different embedding sizes (16, 32, 64)
+The results from Milestone 2 (see ./milestone_2/plots/PerplexityBigramDifferentK.png or ./milestone_2/plots/Perplexity6_GramDifferentK.png) suggest that the perplexity increases with the vocab size because of the artifact of sparsity. So we tried out differte k values (50, 150, 250 and 1000) over different embedding sizes (16, 32, 64)
+
+### Perplexity Results for the test set
+
+| Embedding Dim | Vocab Size (k) | Test Perplexity |
+|---------------|----------------|-----------------|
+| 16            | 50             | 16.65           |
+| 32            | 50             | 11.28           |
+| 64            | 50             | **8.15**        |
+| 16            | 150            | 34.53           |
+| 32            | 150            | 20.77           |
+| 64            | 150            | 13.95           |
+| 16            | 250            | 51.29           |
+| 32            | 250            | 28.82           |
+| 64            | 250            | 19.92           |
+| 16            | 1000           | 108.49          |
+| 32            | 1000           | 77.34           |
+| 64            | 1000           | 58.92           |
+|                                                  |
+| **Best:**                                        |
+|Embedding dim = 64 | k = 50 | Test Perplexity = **8.15**|
 
 ### Embedding Dimensions = 16
 
@@ -191,15 +211,54 @@ The results show that models with larger embedding dimensions achieve consistent
 
 Across both embedding dimensions, smaller vocabulary sizes (k=50) result in significantly lower perplexity compared to larger vocabularies (k=250 or beyond). As already explained above, the explanation lies in data sparsity: with a small corpus like Shakespeare, increasing k means that many tokens and token combinations appear very rarely, making it difficult for the model to learn stable probability estimates. With fewer tokens (small k), each token appears more frequently, allowing the model to estimate distributions more reliably and reduce uncertainty. Thus, while larger embeddings help, they cannot fully overcome the sparsity introduced by large vocabularies on such a limited dataset.
 
+### Generated Texts among different sampling techniques
+
+**k = 50**
+
+| Sampling Technique | Output                                                                                                                                                                              |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Argmax**         | `hello julia i have not seen my lord, and that i have not been my lord, and that i have not seen my lord, and that i have seen my lord, and that i have seen made me to be said to` |
+| **Sampling**       | `hello julia that must not up yet by the philost requires have not chafe within.`                                                                                                   |
+| **TopK**           | `hello julia what i do, you are no greats; that is morning, i have placed to some amen, if may call'd upon it; the good, that is a frates; and this soldier courtesy`               |
+| **TopP**           | `hello julia what is your life to the master to be heart and my love, and say the world.`                                                                                           |
+
+**k = 250**
+
+| Sampling Technique | Output                                                                                                                                                                                                                           |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Argmax**         | `hello julia i am not to be a place.`                                                                                                                                                                                            |
+| **Sampling**       | `hello julia we should not went away! roderigo with him; i think your expresent is it him.`                                                                                                                                      |
+| **TopK**           | `hello julia my lord bassanio ay, you were me, but you shall go with you, but i am a sleep.`                                                                                                                                     |
+| **TopP**           | `hello julia what, for the air, that i am continue to speak on the friends: and this is gone, sir, it will go to the revenge of my place, as he would speak as long as admiried as i do revenge; when you have no hand but made` |
+
+As seen above Argmax has repetition and loops. In contrast, pure sampling draws from the full probability distribution, introducing diversity. However, because it also allows very low-probability tokens to be chosen, it often produces incoherent or ungrammatical text, especially with small datasets.
+Top-k and top-p sampling produce the most realistic text because they balance variation and coherence. Unlike pure argmax, which always chooses the single most probable token and often falls into repetitive loops, and unlike unconstrained sampling, which may select very unlikely tokens and produce nonsense, top-k and top-p restrict the sampling space to plausible continuations. Top-k fixes the number of candidates, while top-p dynamically adapts the candidate set based on cumulative probability mass. Both methods prevent low-probability noise while still allowing diversity, which results in outputs that are more fluent and natural-sounding.
+
+Under /GPT/generated_texts/{emb_dim}_{k} you can find all the generated texts based on "hello julia"
+
 ## Comparing GPT with Neural N-Gram and classic N-Gram
 
 The 6-gram backoff model achieves the best performance in terms of perplexity (as low as ~5), especially with small vocabularies. This surprisingly strong result arises because backoff n-grams effectively memorize frequent local patterns in the small and repetitive Shakespeare dataset, where many 6-token contexts reappear exactly. The backoff mechanism further mitigates sparsity by reverting to shorter histories when necessary, making predictions robust. However, this advantage is largely an artifact of memorization and does not generalize well: as the vocabulary size grows, sparsity dominates and perplexity increases almost linearly.
 
-By contrast, the Transformer excels in principle because it can capture long-range dependencies and leverage embeddings for richer representations, but on this small dataset its capacity is underutilized. Instead of memorizing, it must learn probabilistic structure for many rare contexts, which keeps its perplexity higher than that of the n-gram backoff despite its more advanced architecture. The neural bigram performs worst overall, as it is bottlenecked by the extremely short context of only one token. The neural n-gram with LSTM offers a middle ground
+By contrast, the Transformer excels in principle because it can capture long-range dependencies and leverage embeddings for richer representations, but on this small dataset its capacity is underutilized. Instead of memorizing, it must learn probabilistic structure for many rare contexts, which keeps its perplexity higher than that of the n-gram backoff despite its more advanced architecture. The neural bigram performs worst overall, as it is bottlenecked by the extremely short context of only one token. The neural n-gram with LSTM offers a middle ground. 
+
+Final comparison:  
+| Classic N-gram | Neural N-Gram | Transformer |
+|---------------|----------------|-----------------|
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
+
+
+
 
 # Appendix
 
-### Milestone 3: Loss and Perplex among different learning rates and k
+### Milestone 3: Loss and Perplexity among different learning rates and k
 
 #### Hardcore Version
 
@@ -264,19 +323,19 @@ By contrast, the Transformer excels in principle because it can capture long-ran
 %doto milestone_2/hardcore/plots here
 
 ### GPT
-Embedding Size 16 on different k:
+### Embedding Size 16 on different k:  
 ![alt text](./GPT/plotting/plots/16_50.png)
 ![alt text](./GPT/plotting/plots/16_150.png)
 ![alt text](./GPT/plotting/plots/16_250.png)
 ![alt text](./GPT/plotting/plots/16_1000.png)
 
-Embedding Size 32 on different k:
+### Embedding Size 32 on different k:  
 ![alt text](./GPT/plotting/plots/32_50.png)
 ![alt text](./GPT/plotting/plots/32_150.png)
 ![alt text](./GPT/plotting/plots/32_250.png)
 ![alt text](./GPT/plotting/plots/32_1000.png)
 
-Embedding Size 64 on different k:
+### Embedding Size 64 on different k:  
 ![alt text](./GPT/plotting/plots/64_50.png)
 ![alt text](./GPT/plotting/plots/64_150.png)
 ![alt text](./GPT/plotting/plots/64_250.png)
